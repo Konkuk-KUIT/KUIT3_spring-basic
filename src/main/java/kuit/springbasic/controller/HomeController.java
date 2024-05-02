@@ -20,8 +20,7 @@ public class HomeController {
 
     private final MemoryQuestionRepository memoryQuestionRepository;
 
-    @RequestMapping("/homeV1")
-//    @RequestMapping("/")
+//    @RequestMapping("/homeV1")
     public ModelAndView showHomeV1(HttpServletRequest request, HttpServletResponse response) {
         log.info("HomeController.homeV1");
 
@@ -33,8 +32,7 @@ public class HomeController {
         return modelAndView;
     }
 
-    @RequestMapping("/homeV2")
-//    @RequestMapping("/")
+//    @RequestMapping("/homeV2")
     public ModelAndView showHomeV2() {
         log.info("HomeController.homeV2");
 
