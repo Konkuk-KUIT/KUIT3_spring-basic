@@ -74,13 +74,12 @@ public class LoginController {
     }
 
     @RequestMapping("logout")
-    public ModelAndView doLogout(@ModelAttribute User logginedUser, HttpServletRequest request){
+    public ModelAndView doLogout(HttpServletRequest request){
         log.info("LoginContorrler.dologout");
-        User user = memoryUserRepository.findByUserId(logginedUser.getUserId());
         request.getSession().removeAttribute("user");
         return new ModelAndView("redirect:/");
 
     }
-   
+
 
 }
