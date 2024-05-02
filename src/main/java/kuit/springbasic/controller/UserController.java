@@ -3,6 +3,7 @@ package kuit.springbasic.controller;
 import jakarta.servlet.http.HttpServletRequest;
 import kuit.springbasic.db.MemoryUserRepository;
 import kuit.springbasic.domain.User;
+import kuit.springbasic.util.UserSessionUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.web.servlet.server.Jsp;
 import org.springframework.stereotype.Controller;
@@ -57,8 +58,11 @@ public class UserController {
      */
 
     @RequestMapping("/list")
-    public String showUserList(){
-        return "/user/list";
+    public ModelAndView showUserList(HttpServletRequest request){
+        if(UserSessionUtils.isLoggedIn(request.getSession())){
+            return new ModelAndView("user/list").addObject("users", memoryUserRepository.findAll());
+        }
+        return new ModelAndView("redirect:/user/loginForm");
     }
 
     /**
