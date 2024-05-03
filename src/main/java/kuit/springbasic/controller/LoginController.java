@@ -32,7 +32,9 @@ public class LoginController {
     }
 
 
-
+    /**
+     * @RequestParam 이용한 login
+     */
 //    @RequestMapping("/login")
 //    public ModelAndView login(@RequestParam("userId") String userId, @RequestParam("password") String password, HttpServletRequest request){
 //        User user = memoryUserRepository.findByUserId(userId);
@@ -65,7 +67,4 @@ public class LoginController {
         request.getSession().removeAttribute("user");
         return new ModelAndView( "redirect:/");
     }
-
-
-
 }

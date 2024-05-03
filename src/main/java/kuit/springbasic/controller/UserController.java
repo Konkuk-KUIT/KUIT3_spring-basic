@@ -42,6 +42,9 @@ public class UserController {
         return new ModelAndView( "redirect:/user/list");
     }
 
+    /**
+     * @RequestParam 이용한 createUser
+     */
 //    @RequestMapping("/user/signup")
 //    public ModelAndView createUser(@RequestParam("userId") String userId, @RequestParam("password") String password,
 //                                   @RequestParam("name") String name, @RequestParam("email") String email,
