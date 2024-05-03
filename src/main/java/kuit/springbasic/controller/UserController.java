@@ -6,6 +6,7 @@ import kuit.springbasic.db.MemoryUserRepository;
 import kuit.springbasic.domain.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -36,7 +37,7 @@ public class UserController {
     public String createUser(@ModelAttribute User user){
         userRepository.insert(user);
 
-        return "redirect:/"; // redirect:/user/list로 했을 때 오류가 나는 이유는?
+        return "/user/login"; // redirect:/user/login로 했을 때 오류가 나는 이유는?
     }
 
     /**
@@ -44,10 +45,10 @@ public class UserController {
      */
 
     @RequestMapping("/user/list")
-    public String showUserList(HttpServletRequest req, Map<String, Object> model){
+    public String showUserList(HttpServletRequest req, Model model){
         HttpSession session = req.getSession();
         if(isLoggedIn(session)){
-            model.put("users", userRepository.findAll());
+            model.addAttribute("users", userRepository.findAll());
             return "/user/list";
         }
         return "redirect:/user/loginForm";
@@ -57,13 +58,13 @@ public class UserController {
      * TODO: showUserUpdateForm
      */
     @RequestMapping("/user/updateForm")
-    public String showUserUpdateForm(HttpServletRequest req, Map<String, Object> model){
+    public String showUserUpdateForm(HttpServletRequest req, Model model){
         String userId = req.getParameter("userId");
         User user = userRepository.findByUserId(userId);
         HttpSession session = req.getSession();
         User loggedInUser = (User) session.getAttribute("user");
         if(user != null && loggedInUser != null && user.isSameUser(loggedInUser)){
-            model.put("user", user);
+            model.addAttribute("user", user);
             return "/user/updateForm";
         }
         return "redirect:/user/list";
@@ -76,7 +77,7 @@ public class UserController {
      */
 
     @RequestMapping("/user/update")
-    public String updateUser(@ModelAttribute User user, HttpServletRequest req){
+    public String updateUser(@ModelAttribute User user){
         userRepository.update(user);
         return "redirect:/user/list";
     }
