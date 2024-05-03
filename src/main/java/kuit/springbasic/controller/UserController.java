@@ -83,7 +83,7 @@ public class UserController {
      */
 
     @RequestMapping("/updateForm")
-    public ModelAndView showUserUpdateForm(HttpServletRequest request){
+    public ModelAndView showUserUpdaLteForm(HttpServletRequest request){
         ModelAndView modelAndView = new ModelAndView();
         HttpSession session = request.getSession();
         if(UserSessionUtils.isLoggedIn(session)) {

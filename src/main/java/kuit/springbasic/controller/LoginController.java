@@ -6,6 +6,7 @@ import kuit.springbasic.domain.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -40,11 +41,23 @@ public class LoginController {
         return new ModelAndView("redirect:/user/loginFailed");
     }
 
+//    @RequestMapping("/login")
+//    public String login(@ModelAttribute User tryuser, HttpServletRequest request){
+//        User findUser = memoryUserRepository.findByUserId(tryuser.getUserId());
+//        if(findUser != null && findUser.isSameUser(tryuser.getUserId(), tryuser.getPassword())){
+//            request.getSession().setAttribute("user", findUser);
+//            return "redirect:/";
+//        }
+//        return "redirect:/user/loginFailed";
+//    }
+
+
     @RequestMapping("/user/logout")
     public String logout(HttpServletRequest request) {
         request.getSession().removeAttribute("user");
         return "redirect:/";
     }
+
 
     /**
      * TODO: showLoginForm
