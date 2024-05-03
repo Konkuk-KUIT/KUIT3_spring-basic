@@ -60,5 +60,12 @@ public class LoginController {
     /**
      * TODO: logout
      */
+    @RequestMapping("/logout")
+    public ModelAndView logout(HttpServletRequest request) {
+        request.getSession().removeAttribute("user");
+        return new ModelAndView( "redirect:/v1");
+    }
+
+
 
 }
