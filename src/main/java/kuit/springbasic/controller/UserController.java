@@ -18,7 +18,7 @@ import java.util.Map;
 public class UserController {
 
     private final MemoryUserRepository memoryUserRepository;
-    
+
     @RequestMapping("/user/form")
     public String showUserForm(@ModelAttribute User signningUser){
         return "/user/form";
@@ -31,17 +31,15 @@ public class UserController {
      * createUserV1 : @RequestParam
      * createUserV2 : @ModelAttribute
      */
-//    @RequestMapping("/user/form")
-//
-//    public ModelAndView showUserForm(@ModelAttribute User signningUser){
-//        User user = new User(signningUser.getUserId(),
-//                signningUser.getPassword(),
-//                signningUser.getName(),
-//                signningUser.getEmail());
-//        memoryUserRepository.insert(user);
-//        return new ModelAndView( "redirect:/user/userList");
-//
-//    }
+    @RequestMapping("/user/signup")
+    public ModelAndView createUser(@ModelAttribute User signningUser){
+        User user = new User(signningUser.getUserId(),
+                signningUser.getPassword(),
+                signningUser.getName(),
+                signningUser.getEmail());
+        memoryUserRepository.insert(user);
+        return new ModelAndView( "redirect:/user/userList");
+    }
 
 
     /**
