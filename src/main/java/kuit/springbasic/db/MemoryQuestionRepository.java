@@ -2,12 +2,13 @@ package kuit.springbasic.db;
 
 
 import kuit.springbasic.domain.Question;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+@Repository
 public class MemoryQuestionRepository {
     private Map<String, Question> questions= new HashMap<>();
     private static int PK = 0;

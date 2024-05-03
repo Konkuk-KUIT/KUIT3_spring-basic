@@ -6,6 +6,7 @@ import kuit.springbasic.db.MemoryQuestionRepository;
 import kuit.springbasic.domain.Question;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +23,7 @@ public class HomeController {
 
     @RequestMapping("/homeV1")
 //    @RequestMapping("/")
-    public ModelAndView showHomeV1(HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView showHomeV1() {
         log.info("HomeController.homeV1");
 
         ModelAndView modelAndView = new ModelAndView("home");
@@ -32,20 +33,6 @@ public class HomeController {
 
         return modelAndView;
     }
-
-    @RequestMapping("/homeV2")
-//    @RequestMapping("/")
-    public ModelAndView showHomeV2() {
-        log.info("HomeController.homeV2");
-
-        ModelAndView modelAndView = new ModelAndView("home");
-
-        List<Question> questions = memoryQuestionRepository.findAll();
-        modelAndView.addObject("questions", questions);
-
-        return modelAndView;
-    }
-
     @RequestMapping("/")
     public String showHomeV3(Model model) {
         log.info("HomeController.homeV3");
@@ -55,5 +42,4 @@ public class HomeController {
 
         return "home";
     }
-
 }
