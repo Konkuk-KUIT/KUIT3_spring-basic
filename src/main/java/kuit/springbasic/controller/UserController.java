@@ -17,19 +17,20 @@ import java.util.Map;
 @Setter
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("/user")
 public class UserController {
 
     private final MemoryUserRepository memoryUserRepository;
     private final UserSessionUtils userSessionUtils;
 
-    @RequestMapping("/user/form")
+    @RequestMapping("/form")
     public String showUserForm(){
         return "/user/form";
 
     }
 
 
-    @RequestMapping("/user/signup")
+    @RequestMapping("/signup")
     public ModelAndView createUser(@ModelAttribute User signningUser){
         User user = new User(signningUser.getUserId(),
                 signningUser.getPassword(),
@@ -57,7 +58,7 @@ public class UserController {
      * TODO: showUserList
      */
 
-    @RequestMapping("/user/list")
+    @RequestMapping("/list")
     public String showUserList( HttpServletRequest request, Map<String, Object> model)  {
 
         if (userSessionUtils.isLoggedIn(request.getSession())) {
@@ -67,7 +68,7 @@ public class UserController {
         return "redirect:/user/loginForm";
     }
 
-    @RequestMapping("/user/updateForm")
+    @RequestMapping("/updateForm")
     public String showUserUpdateForm(){
         return "/user/updateForm";
 
@@ -79,7 +80,7 @@ public class UserController {
      * updateUserV1 : @RequestParam
      * updateUserV2 : @ModelAttribute
      */
-    @RequestMapping("/user/update")
+    @RequestMapping("/update")
     public String updateUser(@ModelAttribute User updatinguser){
         User user = new User(updatinguser.getUserId(),
                 updatinguser.getPassword(),
