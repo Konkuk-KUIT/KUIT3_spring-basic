@@ -1,13 +1,12 @@
 package kuit.springbasic.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
 @AllArgsConstructor
 @Setter
 @Getter
 @NoArgsConstructor
+@ToString
 public class User {
     private String userId;
     private String password;
@@ -42,14 +41,5 @@ public class User {
     public boolean isSameUser(String userId, String password) {
         return userId.equals(this.userId) && matchPassword(password);
     }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "userId='" + userId + '\'' +
-                ", password='" + password + '\'' +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                '}';
-    }
+    
 }
