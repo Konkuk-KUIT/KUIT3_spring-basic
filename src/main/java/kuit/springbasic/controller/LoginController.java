@@ -19,15 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class LoginController {
 
     private final MemoryUserRepository memoryUserRepository;
-    @RequestMapping("/loginForm")
-    public String showLoginForm(){
-        return "/user/login";
-    }
 
-    @RequestMapping("/loginFailed")
-    public String showLoginFailed(){
-        return "/user/loginFailed";
-    }
     //@RequestMapping("login")
     public ModelAndView doLoginV1(@RequestParam("userId")String userId, @RequestParam("password")String password, HttpServletRequest request){
         log.info("LoginContorrler.dologin");
