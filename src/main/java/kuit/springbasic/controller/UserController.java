@@ -67,10 +67,6 @@ public class UserController {
         return "redirect:/user/loginForm";
     }
 
-    /**
-     * TODO: showUserUpdateForm
-     */
-
     @RequestMapping("/user/updateForm")
     public String showUserUpdateForm(){
         return "/user/updateForm";
@@ -83,5 +79,16 @@ public class UserController {
      * updateUserV1 : @RequestParam
      * updateUserV2 : @ModelAttribute
      */
+    @RequestMapping("/user/update")
+    public String updateUser(@ModelAttribute User updatinguser){
+        User user = new User(updatinguser.getUserId(),
+                updatinguser.getPassword(),
+                updatinguser.getName(),
+                updatinguser.getEmail());
+
+        memoryUserRepository.changeUserInfo(user);
+
+        return "redirect:/user/list";
+    }
 
 }
