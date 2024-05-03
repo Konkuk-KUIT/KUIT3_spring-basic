@@ -11,23 +11,24 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Slf4j
 @Controller
-//@RequestMapping("/user") //TODO UserController에서도 /user prefix 쓰는데 여기서 다 받아버려도 되나
+@RequestMapping("/user")
+//UserController에서도 /user prefix 쓰는데 여기서 다 받아버려도 되나 -> 정상작동 확인함
 @RequiredArgsConstructor
 public class LoginController {
 
     private final MemoryUserRepository memoryUserRepository;
 
-    @GetMapping("/user/loginForm")
+    @GetMapping("/loginForm")
     public String loginForm() {
         return "/user/login";
     }
 
-    @GetMapping("/user/loginFailed")
+    @GetMapping("/loginFailed")
     public String loginFailed() {
         return "/user/loginFailed";
     }
 
-    @PostMapping("/user/loginV1")
+    @PostMapping("/loginV1")
     public ModelAndView doLoginV1(@RequestParam("userId") String userId, @RequestParam("password") String password,
                           HttpServletRequest request) {
         log.info("LoginController.doLoginV1");
@@ -39,7 +40,7 @@ public class LoginController {
         return new ModelAndView("redirect:/user/loginFailed");
     }
 
-    @PostMapping("/user/login")
+    @PostMapping("/login")
     // @ModelAttribute : 기본생성자와 Setter 이용해 알아서 인자를 객체로 만들어줌
     public ModelAndView doLoginV2(@ModelAttribute User loggedinUser, HttpServletRequest request) {
         log.info("LoginController.doLoginV2");
@@ -51,7 +52,7 @@ public class LoginController {
         return new ModelAndView("redirect:/user/loginFailed");
     }
 
-    @GetMapping("/user/logout") //TODO 회원가입 구현 후 정상동작 확인
+    @GetMapping("/logout") //TODO 회원가입 구현 후 정상동작 확인
     public String logout(HttpServletRequest request) {
         log.info("LoginController.logout");
         request.getSession().removeAttribute("user");

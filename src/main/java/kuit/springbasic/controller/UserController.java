@@ -7,39 +7,37 @@ import kuit.springbasic.domain.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Slf4j
 @Controller
+@RequestMapping("/user")
 @RequiredArgsConstructor
 public class UserController {
 
     private final MemoryUserRepository memoryUserRepository;
 
-    @GetMapping("user/form")
+    @GetMapping("/form")
     public String signUpForm() {
         return "user/form";
     }
 
-    @PostMapping("/user/signupV1")
+    @PostMapping("/signupV1")
     public String signup(@RequestParam String name, @RequestParam String password) {
         log.info("UserController signupV1");
         memoryUserRepository.insert(new User(name, password));
         return "redirect:/";
     }
 
-    @PostMapping("/user/signup")
+    @PostMapping("/signup")
     public String signup(@ModelAttribute User user) {
         log.info("UserController signup");
         memoryUserRepository.insert(user);
         return "redirect:/";
     }
 
-    @GetMapping("/user/list")
+    @GetMapping("/list")
     public ModelAndView userList(HttpServletRequest request) {
         log.info("UserController userList");
         User user = (User) request.getSession().getAttribute("user");
@@ -65,7 +63,7 @@ public class UserController {
 //            return new ModelAndView(REDIRECT+"/v1/user/loginForm");
 //        }
 
-    @GetMapping("/user/updateForm")
+    @GetMapping("/updateForm")
     public ModelAndView updateForm(@RequestParam String userId, HttpServletRequest request) {
         log.info("UserController updateForm");
         User loginedUser = (User) request.getSession().getAttribute("user");
@@ -93,7 +91,7 @@ public class UserController {
 //        }
 //    }
 
-    @PostMapping("/user/updateV1")
+    @PostMapping("/updateV1")
     public String update(@RequestParam String userId,@RequestParam String password,
                          @RequestParam String name,@RequestParam String email) {
         log.info("UserController update");
@@ -102,7 +100,7 @@ public class UserController {
         return "redirect:/user/list";
     }
 
-    @PostMapping("/user/update")
+    @PostMapping("/update")
     public String update(@ModelAttribute User user) {
         log.info("UserController update");
         memoryUserRepository.changeUserInfo(user);
