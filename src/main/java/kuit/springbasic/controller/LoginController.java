@@ -19,32 +19,19 @@ public class LoginController {
 
     private final MemoryUserRepository memoryUserRepository;
 
-    /**
-     * TODO: showLoginForm
-     */
     @RequestMapping("/loginForm")
     public String showLoginForm(){
         return "/user/login";
     }
 
 
-    /**
-     * TODO: showLoginFailed
-     */
+
     @RequestMapping("/loginFailed")
     public String showLoginFailed(){
         return "user/loginFailed";
     }
 
 
-
-    /**
-     * TODO: login
-     * loginV1 : @RequestParam("")
-     * loginV2 : @RequestParam
-     * loginV3 : @RequestParam 생략(비추천)
-     * loginV4 : @ModelAttribute
-     */
 
 //    @RequestMapping("/login")
 //    public ModelAndView login(@RequestParam("userId") String userId, @RequestParam("password") String password, HttpServletRequest request){
