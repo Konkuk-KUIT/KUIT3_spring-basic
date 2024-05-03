@@ -28,30 +28,24 @@ public class UserController {
     }
 
 
-    /**
-     * TODO: createUser
-     * createUserV1 : @RequestParam
-     * createUserV2 : @ModelAttribute
-     */
-//    @RequestMapping("/user/signup")
-//    public ModelAndView createUser(@ModelAttribute User signningUser){
-//        User user = new User(signningUser.getUserId(),
-//                signningUser.getPassword(),
-//                signningUser.getName(),
-//                signningUser.getEmail());
-//        memoryUserRepository.insert(user);
-//        return new ModelAndView( "redirect:/user/userList");
-//    }
-
     @RequestMapping("/user/signup")
-    public ModelAndView createUser(@RequestParam("userId") String userId, @RequestParam("password") String password,
-                                   @RequestParam("name") String name, @RequestParam("email") String email,
-                                   HttpServletRequest request){
-        User user = new User(userId,password,name,email);
+    public ModelAndView createUser(@ModelAttribute User signningUser){
+        User user = new User(signningUser.getUserId(),
+                signningUser.getPassword(),
+                signningUser.getName(),
+                signningUser.getEmail());
         memoryUserRepository.insert(user);
-        return new ModelAndView("redirect:/user/loginFailed");
-
+        return new ModelAndView( "redirect:/user/userList");
     }
+
+//    @RequestMapping("/user/signup")
+//    public ModelAndView createUser(@RequestParam("userId") String userId, @RequestParam("password") String password,
+//                                   @RequestParam("name") String name, @RequestParam("email") String email,
+//                                   HttpServletRequest request){
+//        User user = new User(userId,password,name,email);
+//        memoryUserRepository.insert(user);
+//        return new ModelAndView("redirect:/user/loginFailed");
+//    }
 
 
 
