@@ -13,15 +13,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
-@Slf4j
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 public class HomeController {
 
     private final MemoryQuestionRepository memoryQuestionRepository;
 
-    @RequestMapping("/homeV1")
-//    @RequestMapping("/")
+//   @RequestMapping("/")
     public ModelAndView showHomeV1(HttpServletRequest request, HttpServletResponse response) {
         log.info("HomeController.homeV1");
 
@@ -33,7 +32,6 @@ public class HomeController {
         return modelAndView;
     }
 
-    @RequestMapping("/homeV2")
 //    @RequestMapping("/")
     public ModelAndView showHomeV2() {
         log.info("HomeController.homeV2");
@@ -49,7 +47,6 @@ public class HomeController {
     @RequestMapping("/")
     public String showHomeV3(Model model) {
         log.info("HomeController.homeV3");
-
         List<Question> questions = memoryQuestionRepository.findAll();
         model.addAttribute("questions", questions);
 
