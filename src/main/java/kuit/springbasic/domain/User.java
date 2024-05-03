@@ -41,5 +41,5 @@ public class User {
     public boolean isSameUser(String userId, String password) {
         return userId.equals(this.userId) && matchPassword(password);
     }
-    
+
 }
