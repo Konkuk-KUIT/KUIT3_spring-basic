@@ -1,10 +1,7 @@
 package kuit.springbasic.domain;
 
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -13,6 +10,7 @@ import java.time.LocalDate;
 @Getter
 @NoArgsConstructor
 @ToString
+@AllArgsConstructor
 public class Question {
     private int questionId;
     private String writer;
@@ -20,16 +18,6 @@ public class Question {
     private String contents;
     private Date createdDate;
     private int countOfAnswer;
-
-
-    public Question(int questionId, String writer, String title, String contents, Date createdDate, int countOfAnswer) {
-        this.questionId = questionId;
-        this.writer = writer;
-        this.title = title;
-        this.contents = contents;
-        this.createdDate = createdDate;
-        this.countOfAnswer = countOfAnswer;
-    }
 
     public Question(String writer, String title, String contents, int countOfAnswer) {
         this.questionId = 0;
