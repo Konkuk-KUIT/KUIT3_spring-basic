@@ -18,7 +18,6 @@ import org.springframework.web.servlet.ModelAndView;
 public class UserController {
 
     private final MemoryUserRepository memoryUserRepository;
-    HttpSession session;
 
     /**
      * TODO: showUserForm

@@ -18,6 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class HomeController {
 
+    //interface로 바꿔서 DI로 주입하기
     private final MemoryQuestionRepository memoryQuestionRepository;
 
     @RequestMapping("/homeV1")

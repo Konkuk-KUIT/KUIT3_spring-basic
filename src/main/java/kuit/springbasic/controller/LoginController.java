@@ -15,8 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequiredArgsConstructor
 @RequestMapping("/user")
 public class LoginController {
-
-    HttpSession session;
+    
     private final MemoryUserRepository memoryUserRepository;
 
 
