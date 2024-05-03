@@ -18,7 +18,6 @@ import static kuit.springbasic.util.UserSessionUtils.isLoggedIn;
 @RequiredArgsConstructor
 public class UserController {
 
-
     private final MemoryUserRepository memoryUserRepository;
 
     @RequestMapping("/form")
@@ -41,41 +40,34 @@ public class UserController {
     }
 
 //    @RequestMapping("/signup")
-//    public ModelAndView createUserV1(@RequestParam("userId") String userId, @RequestParam("password") String password,
-//                                     @RequestParam("name") String name, @RequestParam("email") String email) {
-//        log.info("createUserV1");
-//        User user = new User(userId, password, name, email);
-//        memoryUserRepository.insert(user);
-//        return new ModelAndView("redirect:/user/list");
-//    }
-//
+    public ModelAndView createUserV1(@RequestParam("userId") String userId, @RequestParam("password") String password,
+                                     @RequestParam("name") String name, @RequestParam("email") String email) {
+        log.info("createUserV1");
+        User user = new User(userId, password, name, email);
+        memoryUserRepository.insert(user);
+        return new ModelAndView("redirect:/user/list");
+    }
+
 //    @RequestMapping("/update")
-//    public ModelAndView updateUserV1(@RequestParam("userId") String userId, @RequestParam("password") String password,
-//                                     @RequestParam("name") String name, @RequestParam("email") String email) {
-//        log.info("updateUserV1");
-//        User user = new User(userId, password, name, email);
-//        memoryUserRepository.changeUserInfo(user);
-//        return new ModelAndView("redirect:/user/list");
-//    }
+    public ModelAndView updateUserV1(@RequestParam("userId") String userId, @RequestParam("password") String password,
+                                     @RequestParam("name") String name, @RequestParam("email") String email) {
+        log.info("updateUserV1");
+        User user = new User(userId, password, name, email);
+        memoryUserRepository.changeUserInfo(user);
+        return new ModelAndView("redirect:/user/list");
+    }
 
     @RequestMapping("/signup")
     public ModelAndView createUserV2(@ModelAttribute User createUser) {
         log.info("createUserV2");
-        User user = new User(createUser.getUserId(),
-                createUser.getPassword(),
-                createUser.getName(),
-                createUser.getEmail());
-        memoryUserRepository.insert(user);
+        memoryUserRepository.insert(createUser);
         return new ModelAndView("redirect:/user/list");
     }
+
     @RequestMapping("/update")
     public ModelAndView updateUserV2(@ModelAttribute User updateUser){
         log.info("updateUserV2");
-        User user = new User(updateUser.getUserId(),
-                updateUser.getPassword(),
-                updateUser.getName(),
-                updateUser.getEmail());
-        memoryUserRepository.changeUserInfo(user);
+        memoryUserRepository.changeUserInfo(updateUser);
         return new ModelAndView("redirect:/user/list");
     }
 }

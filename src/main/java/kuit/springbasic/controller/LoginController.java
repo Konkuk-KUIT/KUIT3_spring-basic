@@ -80,7 +80,5 @@ public class LoginController {
         }
         return new ModelAndView("redirect:/user/loginFailed");
     }
-
-
 }
 

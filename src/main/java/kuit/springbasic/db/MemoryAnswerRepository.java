@@ -42,7 +42,6 @@ public class MemoryAnswerRepository {
         return result;
     }
 
-
     public Answer insert(Answer answer) {
         answer.setAnswerId(getPK());
         answer.setCreatedDate(Date.valueOf(LocalDate.now()));
