@@ -51,8 +51,10 @@ public class LoginController {
         return new ModelAndView("redirect:/user/loginFailed");
     }
 
-    /**
-     * TODO: logout
-     */
-
+    @GetMapping("/logout") //TODO 회원가입 구현 후 정상동작 확인
+    public String logout(HttpServletRequest request) {
+        log.info("LoginController.logout");
+        request.getSession().removeAttribute("user");
+        return "redirect:/";
+    }
 }
