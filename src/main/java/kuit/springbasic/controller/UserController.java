@@ -68,7 +68,7 @@ public class UserController {
         log.info("UserController updateForm");
         User loginedUser = (User) request.getSession().getAttribute("user");
         User user = memoryUserRepository.findByUserId(userId);
-        if (user != null && loginedUser != null && loginedUser.equals(user)) {
+        if (user != null && loginedUser != null && loginedUser.getUserId().equals(user.getUserId())) {
             ModelAndView modelAndView = new ModelAndView("/user/updateForm");
             modelAndView.getModel().put("user", user);
             return modelAndView;
