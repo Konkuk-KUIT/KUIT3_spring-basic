@@ -1,9 +1,18 @@
 package kuit.springbasic.domain;
 
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
 import java.sql.Date;
 import java.time.LocalDate;
 
+@Setter
+@Getter
+@NoArgsConstructor
+@ToString
 public class Question {
     private int questionId;
     private String writer;
@@ -12,9 +21,6 @@ public class Question {
     private Date createdDate;
     private int countOfAnswer;
 
-    public Question() {
-
-    }
 
     public Question(int questionId, String writer, String title, String contents, Date createdDate, int countOfAnswer) {
         this.questionId = questionId;
@@ -34,53 +40,6 @@ public class Question {
         this.countOfAnswer = countOfAnswer;
     }
 
-    public int getQuestionId() {
-        return questionId;
-    }
-
-    public void setQuestionId(int questionId) {
-        this.questionId = questionId;
-    }
-
-    public String getWriter() {
-        return writer;
-    }
-
-    public void setWriter(String writer) {
-        this.writer = writer;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getContents() {
-        return contents;
-    }
-
-    public void setContents(String contents) {
-        this.contents = contents;
-    }
-
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public int getCountOfAnswer() {
-        return countOfAnswer;
-    }
-
-    public void setCountOfAnswer(int countOfAnswer) {
-        this.countOfAnswer = countOfAnswer;
-    }
 
     public void updateTitleAndContents(String title, String contents) {
         this.title = title;
@@ -110,15 +69,5 @@ public class Question {
         this.countOfAnswer = question.countOfAnswer;
     }
 
-    @Override
-    public String toString() {
-        return "Question{" +
-                "questionId=" + questionId +
-                ", writer='" + writer + '\'' +
-                ", title='" + title + '\'' +
-                ", contents='" + contents + '\'' +
-                ", createdDate=" + createdDate +
-                ", countOfAnswer=" + countOfAnswer +
-                '}';
-    }
+
 }
