@@ -1,9 +1,18 @@
 package kuit.springbasic.domain;
 
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.stereotype.Repository;
+
 import java.sql.Date;
 import java.time.LocalDate;
-
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Question {
     private int questionId;
     private String writer;
@@ -12,18 +21,18 @@ public class Question {
     private Date createdDate;
     private int countOfAnswer;
 
-    public Question() {
-
-    }
-
-    public Question(int questionId, String writer, String title, String contents, Date createdDate, int countOfAnswer) {
-        this.questionId = questionId;
-        this.writer = writer;
-        this.title = title;
-        this.contents = contents;
-        this.createdDate = createdDate;
-        this.countOfAnswer = countOfAnswer;
-    }
+//    public Question() {
+//
+//    }
+//
+//    public Question(int questionId, String writer, String title, String contents, Date createdDate, int countOfAnswer) {
+//        this.questionId = questionId;
+//        this.writer = writer;
+//        this.title = title;
+//        this.contents = contents;
+//        this.createdDate = createdDate;
+//        this.countOfAnswer = countOfAnswer;
+//    }
 
     public Question(String writer, String title, String contents, int countOfAnswer) {
         this.questionId = 0;

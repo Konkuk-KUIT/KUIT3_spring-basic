@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
+@Repository
 public class MemoryAnswerRepository {
 
     private Map<String, Answer> answers= new HashMap<>();
