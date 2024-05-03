@@ -1,5 +1,6 @@
 package kuit.springbasic.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import kuit.springbasic.db.MemoryUserRepository;
 import kuit.springbasic.domain.User;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
@@ -31,15 +33,26 @@ public class UserController {
      * createUserV1 : @RequestParam
      * createUserV2 : @ModelAttribute
      */
+//    @RequestMapping("/user/signup")
+//    public ModelAndView createUser(@ModelAttribute User signningUser){
+//        User user = new User(signningUser.getUserId(),
+//                signningUser.getPassword(),
+//                signningUser.getName(),
+//                signningUser.getEmail());
+//        memoryUserRepository.insert(user);
+//        return new ModelAndView( "redirect:/user/userList");
+//    }
+
     @RequestMapping("/user/signup")
-    public ModelAndView createUser(@ModelAttribute User signningUser){
-        User user = new User(signningUser.getUserId(),
-                signningUser.getPassword(),
-                signningUser.getName(),
-                signningUser.getEmail());
+    public ModelAndView createUser(@RequestParam("userId") String userId, @RequestParam("password") String password,
+                                   @RequestParam("name") String name, @RequestParam("email") String email,
+                                   HttpServletRequest request){
+        User user = new User(userId,password,name,email);
         memoryUserRepository.insert(user);
-        return new ModelAndView( "redirect:/user/userList");
+        return new ModelAndView("redirect:/user/loginFailed");
+
     }
+
 
 
     /**
