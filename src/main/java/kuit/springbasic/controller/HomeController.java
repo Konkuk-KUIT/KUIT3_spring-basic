@@ -17,7 +17,8 @@ import java.util.Map;
 
 @Slf4j
 @Controller
-@RequiredArgsConstructor //final field 들 찾아서 자동 생성자 생성 //TODO final 없으면 생성자 인자로 안받아주나?
+@RequiredArgsConstructor //final field 들 찾아서 자동 생성자 생성
+// final 없으면 생성자 인자로 안받아주나? -> Yes only for final, non-null fields
 public class HomeController {
 
     private final MemoryQuestionRepository memoryQuestionRepository;
