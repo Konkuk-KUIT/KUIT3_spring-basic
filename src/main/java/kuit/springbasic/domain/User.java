@@ -1,14 +1,13 @@
 package kuit.springbasic.domain;
 
+import lombok.*;
+
+
 public class User {
     private String userId;
     private String password;
     private String name;
     private String email;
-
-    public User() {
-
-    }
 
     public User(String userId, String password, String name, String email) {
         this.userId = userId;
@@ -69,7 +68,7 @@ public class User {
     }
 
     public boolean isSameUser(User user) {
-        return isSameUser(user.getUserId(),user.getPassword());
+        return isSameUser(user.getUserId(), user.getPassword());
     }
 
     public boolean isSameUser(String userId, String password) {
