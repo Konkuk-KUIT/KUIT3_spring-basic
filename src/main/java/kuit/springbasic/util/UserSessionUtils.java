@@ -3,7 +3,9 @@ package kuit.springbasic.util;
 
 import jakarta.servlet.http.HttpSession;
 import kuit.springbasic.domain.User;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class UserSessionUtils {
     public static final String USER_SESSION_KEY = "user";
 

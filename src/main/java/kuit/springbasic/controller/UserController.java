@@ -3,8 +3,10 @@ package kuit.springbasic.controller;
 import jakarta.servlet.http.HttpServletRequest;
 import kuit.springbasic.db.MemoryUserRepository;
 import kuit.springbasic.domain.User;
+import kuit.springbasic.util.UserSessionUtils;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,11 +17,13 @@ import org.springframework.web.servlet.ModelAndView;
 import java.io.IOException;
 import java.util.Map;
 
+@Setter
 @Controller
 @RequiredArgsConstructor
 public class UserController {
 
     private final MemoryUserRepository memoryUserRepository;
+    private final UserSessionUtils userSessionUtils;
 
     @RequestMapping("/user/form")
     public String showUserForm(@ModelAttribute User signningUser){
@@ -35,7 +39,7 @@ public class UserController {
                 signningUser.getName(),
                 signningUser.getEmail());
         memoryUserRepository.insert(user);
-        return new ModelAndView( "redirect:/user/userList");
+        return new ModelAndView( "redirect:/user/list");
     }
 
 //    @RequestMapping("/user/signup")
@@ -52,6 +56,16 @@ public class UserController {
     /**
      * TODO: showUserList
      */
+
+    @RequestMapping("/user/list")
+    public String showUserList( HttpServletRequest request, Map<String, Object> model)  {
+
+        if (userSessionUtils.isLoggedIn(request.getSession())) {
+            model.put("users", memoryUserRepository.findAll());
+            return "/user/list";
+        }
+        return "redirect:/user/loginForm";
+    }
 
     /**
      * TODO: showUserUpdateForm
