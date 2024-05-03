@@ -18,6 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class HomeController {
 
+
     private final MemoryQuestionRepository memoryQuestionRepository;
 
     @RequestMapping("/homeV1")
