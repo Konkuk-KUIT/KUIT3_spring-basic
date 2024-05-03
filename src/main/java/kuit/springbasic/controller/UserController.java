@@ -4,14 +4,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import kuit.springbasic.db.MemoryUserRepository;
 import kuit.springbasic.domain.User;
 import kuit.springbasic.util.UserSessionUtils;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
@@ -26,7 +23,7 @@ public class UserController {
     private final UserSessionUtils userSessionUtils;
 
     @RequestMapping("/user/form")
-    public String showUserForm(@ModelAttribute User signningUser){
+    public String showUserForm(){
         return "/user/form";
 
     }
@@ -73,6 +70,13 @@ public class UserController {
     /**
      * TODO: showUserUpdateForm
      */
+
+    @RequestMapping("/user/updateForm")
+    public String showUserUpdateForm(){
+        return "/user/updateForm";
+
+    }
+
 
     /**
      * TODO: updateUser
