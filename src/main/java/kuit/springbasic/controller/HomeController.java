@@ -3,6 +3,7 @@ package kuit.springbasic.controller;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import kuit.springbasic.db.MemoryQuestionRepository;
+import kuit.springbasic.db.MemoryUserRepository;
 import kuit.springbasic.domain.Question;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class HomeController {
 
+    //interface로 바꿔서 DI로 주입하기 - 시도해보기..
     private final MemoryQuestionRepository memoryQuestionRepository;
 
     @RequestMapping("/homeV1")
