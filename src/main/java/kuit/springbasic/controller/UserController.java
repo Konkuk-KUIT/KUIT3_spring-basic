@@ -40,8 +40,10 @@ public class UserController {
     }
 
 //    @RequestMapping("/signup")
-    public ModelAndView createUserV1(@RequestParam("userId") String userId, @RequestParam("password") String password,
-                                     @RequestParam("name") String name, @RequestParam("email") String email) {
+    public ModelAndView createUserV1(@RequestParam("userId") String userId,
+                                     @RequestParam("password") String password,
+                                     @RequestParam("name") String name,
+                                     @RequestParam("email") String email) {
         log.info("createUserV1");
         User user = new User(userId, password, name, email);
         memoryUserRepository.insert(user);
