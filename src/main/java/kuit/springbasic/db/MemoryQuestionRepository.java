@@ -7,7 +7,9 @@ import org.springframework.stereotype.Repository;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.springframework.stereotype.Service;
 
+@Repository
 public class MemoryQuestionRepository {
     private Map<String, Question> questions= new HashMap<>();
     private static int PK = 0;
