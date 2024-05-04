@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-
+@Repository
 public class MemoryUserRepository {
     private Map<String, User> users = new HashMap<>();
     private static MemoryUserRepository memoryUserRepository;
