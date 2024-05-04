@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Controller
@@ -35,15 +36,13 @@ public class HomeController {
 
     @RequestMapping("/homeV2")
 //    @RequestMapping("/")
-    public ModelAndView showHomeV2() {
+    public String showHomeV2(Map<String, Object> model) {
         log.info("HomeController.homeV2");
 
-        ModelAndView modelAndView = new ModelAndView("home");
+        List<Question> questions = memoryQuestionRepository.findAll().stream().toList();
 
-        List<Question> questions = memoryQuestionRepository.findAll();
-        modelAndView.addObject("questions", questions);
-
-        return modelAndView;
+        model.put("questions",questions);
+        return "home";
     }
 
     @RequestMapping("/")
@@ -55,5 +54,4 @@ public class HomeController {
 
         return "home";
     }
-
 }
