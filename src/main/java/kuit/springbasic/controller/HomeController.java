@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -18,42 +18,39 @@ import java.util.List;
 @RequiredArgsConstructor
 public class HomeController {
 
-    private final MemoryQuestionRepository memoryQuestionRepository;
+  private final MemoryQuestionRepository memoryQuestionRepository;
 
-    @RequestMapping("/homeV1")
-//    @RequestMapping("/")
-    public ModelAndView showHomeV1(HttpServletRequest request, HttpServletResponse response) {
-        log.info("HomeController.homeV1");
+  @GetMapping("/homeV1")
+  public ModelAndView showHomeV1(HttpServletRequest request, HttpServletResponse response) {
+    log.info("HomeController.homeV1");
 
-        ModelAndView modelAndView = new ModelAndView("home");
+    ModelAndView modelAndView = new ModelAndView("home");
 
-        List<Question> questions = memoryQuestionRepository.findAll();
-        modelAndView.addObject("questions", questions);
+    List<Question> questions = memoryQuestionRepository.findAll();
+    modelAndView.addObject("questions", questions);
 
-        return modelAndView;
-    }
+    return modelAndView;
+  }
 
-    @RequestMapping("/homeV2")
-//    @RequestMapping("/")
-    public ModelAndView showHomeV2() {
-        log.info("HomeController.homeV2");
+  @GetMapping("/homeV2")
+  public ModelAndView showHomeV2() {
+    log.info("HomeController.homeV2");
 
-        ModelAndView modelAndView = new ModelAndView("home");
+    ModelAndView modelAndView = new ModelAndView("home");
 
-        List<Question> questions = memoryQuestionRepository.findAll();
-        modelAndView.addObject("questions", questions);
+    List<Question> questions = memoryQuestionRepository.findAll();
+    modelAndView.addObject("questions", questions);
 
-        return modelAndView;
-    }
+    return modelAndView;
+  }
 
-    @RequestMapping("/")
-    public String showHomeV3(Model model) {
-        log.info("HomeController.homeV3");
+  @GetMapping("/")
+  public String showHomeV3(Model model) {
+    log.info("HomeController.homeV3");
 
-        List<Question> questions = memoryQuestionRepository.findAll();
-        model.addAttribute("questions", questions);
+    List<Question> questions = memoryQuestionRepository.findAll();
+    model.addAttribute("questions", questions);
 
-        return "home";
-    }
-
+    return "home";
+  }
 }
