@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-
+@Repository
 public class MemoryUserRepository {
     private Map<String, User> users = new HashMap<>();
     private static MemoryUserRepository memoryUserRepository;
@@ -18,7 +18,7 @@ public class MemoryUserRepository {
         insert(new User("admin","admin","어드민","admin@kuit.com"));
     }
 
-
+    public Map<String, User> getUserList(){return users;}
     public void insert(User user) {
         users.put(user.getUserId(), user);
     }
