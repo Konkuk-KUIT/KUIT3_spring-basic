@@ -24,13 +24,14 @@
 
             <c:forEach items="${users}" var="user">
             <tr>
-                <th class="col-md-3">${user.userId}
+                <th class="col-md-3">${user.userId}</th>
+                <th class="col-md-3">${user.name}</th>
+                <th class="col-md-3">${user.email}</th>
+                <th class="col-md-3">
+                    <c:if test="${user.userId eq sessionScope.loggedInUserId}">
+                        <a href="/user/update" class="btn btn-success" role="button">수정</a>
+                    </c:if>
                 </th>
-                <th class="col-md-3">${user.name}
-                </th>
-                <th class="col-md-3">${user.email}
-                </th>
-                <th class="col-md-3"><a href="/user/updateForm?userId=${user.userId}" class="btn btn-success" role="button">수정</a></th>
             </tr>
             </c:forEach>
             </tbody>
