@@ -1,16 +1,38 @@
 package kuit.springbasic.controller;
 
+import jakarta.servlet.http.HttpSession;
+import kuit.springbasic.db.MemoryUserRepository;
+import kuit.springbasic.domain.User;
+import kuit.springbasic.util.UserSessionUtils;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+@Controller
+@RequiredArgsConstructor
+@Slf4j
 public class LoginController {
 
+    private final MemoryUserRepository memoryUserRepository;
 
-    /**
-     * TODO: showLoginForm
-     */
+    //showLoginForm
+    @GetMapping("/user/loginForm")
+    public String showLoginForm() {
+        log.info("ShowloginFrom");
+        return "user/login";
+    }
 
-    /**
-     * TODO: showLoginFailed
-     */
-
+    //showLoginFailed
+    @GetMapping("/user/loginFailed")
+    public String showLoginFailed() {
+        log.info("ShowLoginFailed");
+        return "user/loginFailed";
+    }
     /**
      * TODO: login
      * loginV1 : @RequestParam("")
@@ -18,9 +40,58 @@ public class LoginController {
      * loginV3 : @RequestParam 생략(비추천)
      * loginV4 : @ModelAttribute
      */
+    //@PostMapping("/user/login")
+    public String loginV1(@RequestParam("userId") String userId, @RequestParam("password") String password, HttpSession session) {
+        log.info("Login Click");
+        User user = memoryUserRepository.findByUserId(userId);
+        if (user != null && user.isSameUser(userId, password)) {
+            session.setAttribute("user", user);
+            return "redirect:/";
+        } else {
+            return "redirect:/user/loginFailed";
+        }
+    }
+    //@PostMapping("/user/login")
+    public String loginV2(@RequestParam String userId, @RequestParam String password, HttpSession session) {
+        log.info("Login Click");
+        User user = memoryUserRepository.findByUserId(userId);
+        if (user != null && user.isSameUser(userId, password)) {
+            session.setAttribute("user", user);
+            return "redirect:/";
+        } else {
+            return "redirect:/user/loginFailed";
+        }
+    }
+    //@PostMapping("/user/login")
+    public String loginV3(String userId, String password, HttpSession session) {
+        log.info("Login Click");
+        User user = memoryUserRepository.findByUserId(userId);
+        if (user != null && user.isSameUser(userId, password)) {
+            session.setAttribute("user", user);
+            return "redirect:/";
+        } else {
+            return "redirect:/user/loginFailed";
+        }
+    }
 
-    /**
-     * TODO: logout
-     */
+    @PostMapping("/user/login")
+    public String loginV4(@ModelAttribute User form, HttpSession session) {
+        log.info("Login Click");
+        User user = memoryUserRepository.findByUserId(form.getUserId());
+        if (user != null && form.isSameUser(user.getUserId(), user.getPassword())) {
+            session.setAttribute("user", user);
+            return "redirect:/";
+        } else {
+            return "redirect:/user/loginFailed";
+        }
+    }
 
+
+    //logout
+    @GetMapping("/user/logout")
+    public String logout(HttpSession session) {
+        log.info("Logout Click");
+        session.removeAttribute("user");
+        return "redirect:/";
+    }
 }
