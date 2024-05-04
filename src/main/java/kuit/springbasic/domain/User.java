@@ -1,5 +1,7 @@
 package kuit.springbasic.domain;
 
+import kuit.springbasic.controller.dto.RegisterRequest;
+
 public class User {
     private String userId;
     private String password;
@@ -8,6 +10,14 @@ public class User {
 
     public User() {
 
+    }
+
+    public static User from(RegisterRequest request) {
+        return new User(
+          request.getUserId(),
+          request.getPassword(),
+          request.getName(),
+          request.getEmail());
     }
 
     public User(String userId, String password, String name, String email) {

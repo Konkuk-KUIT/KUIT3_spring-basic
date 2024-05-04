@@ -38,12 +38,12 @@
 
         <div class="col-md-3 text-end">
             <c:choose>
-            <c:when test="${not empty sessionScope.user}">
+            <c:when test="${not empty sessionScope.loggedInUserId}">
                 <a href="/user/logout" role="button" class="btn btn-outline-primary me-2">Log-Out</a>
-                <a href="/user/updateForm?userId=${sessionScope.user.userId}" role="button" class="btn btn-primary" >개인정보수정</a>
+                <a href="/user/update" role="button" class="btn btn-primary" >개인정보수정</a>
             </c:when>
             <c:otherwise>
-                <a href="/user/loginForm" type="button" class="btn btn-outline-primary me-2">Log-In</a>
+                <a href="/user/login" type="button" class="btn btn-outline-primary me-2">Log-In</a>
                 <a href="/user/form" type="button" class="btn btn-primary">Sign-up</a>
             </c:otherwise>
             </c:choose>
