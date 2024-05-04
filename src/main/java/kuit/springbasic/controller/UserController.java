@@ -31,35 +31,52 @@ public class UserController {
      * createUserV1 : @RequestParam
      * createUserV2 : @ModelAttribute
      */
-    @RequestMapping("/signup")
+    @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public ModelAndView createUser(@RequestParam("userId") String userId,
-                                   @RequestParam("password") String password,
-                                   @RequestParam("name") String name,
-                                   @RequestParam("email") String email) {
-        log.info("CreateUserController.createUser");
-
+                                     @RequestParam("password") String password,
+                                     @RequestParam("name") String name,
+                                     @RequestParam("email") String email) {
+        log.info("Creating user: {}, {}, {}, {}", userId, password, name, email);
         User user = new User(userId, password, name, email);
         memoryUserRepository.insert(user);
-
-        // Redirect to userList page
-        return new ModelAndView("redirect:/v1/user/userList");
+        return new ModelAndView("redirect:/user/userList");
     }
-
 
     /**
      * TODO: showUserList
      */
     @RequestMapping("/userList")
-    public String showList(){return "/user/list";}
+    public ModelAndView showUserList() {
+        ModelAndView modelAndView = new ModelAndView("/user/list");
+        modelAndView.addObject("users", memoryUserRepository.findAll());
+        return modelAndView;
+    }
+
 
     /**
      * TODO: showUserUpdateForm
      */
+    @RequestMapping("/updateForm")
+    public ModelAndView showUserUpdateForm(@RequestParam("userId")String userId) {
+        User updateUser = memoryUserRepository.findByUserId(userId);
+
+        if(updateUser !=null){
+            ModelAndView modelAndView = new ModelAndView("/user/updateForm");
+            modelAndView.getModel().put("user", updateUser);
+            return modelAndView;
+        }
+        return new ModelAndView("redirect:/");
+    }
 
     /**
      * TODO: updateUser
      * updateUserV1 : @RequestParam
      * updateUserV2 : @ModelAttribute
      */
+    @RequestMapping(value = "/update")
+    public ModelAndView updateUser(@ModelAttribute User user) {
+        memoryUserRepository.insert(user);
+        return new ModelAndView("redirect:/user/userList");
+    }
 
 }
