@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import kuit.springbasic.db.MemoryUserRepository;
 import kuit.springbasic.domain.User;
+import kuit.springbasic.util.UserSessionUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -71,8 +72,9 @@ public class LoginController {
         return new ModelAndView("redirect:/user/loginFailed");
     }
 
-    /**
-     * TODO: logout
-     */
-
+    @RequestMapping("/logout")
+    public ModelAndView doLogout(HttpServletRequest request) {
+        request.getSession().removeAttribute("user");
+        return new ModelAndView("redirect:/");
+    }
 }

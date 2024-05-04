@@ -1,8 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-
-
 <!doctype html>
 <html lang="ko">
 <%@ include file="/include/header.jspf"%>
@@ -30,7 +28,16 @@
                 </th>
                 <th class="col-md-3">${user.email}
                 </th>
-                <th class="col-md-3"><a href="/user/updateForm?userId=${user.userId}" class="btn btn-success" role="button">수정</a></th>
+                <th class="col-md-3">
+                    <c:choose>
+                        <c:when test="${user.userId eq sessionScope.user.userId}">
+                            <a href="/user/updateForm?userId=${user.userId}" class="btn btn-success" role="button">수정</a>
+                        </c:when>
+                        <c:otherwise>
+                            <a href="#" class="btn" role="button" disabled>-</a>
+                        </c:otherwise>
+                    </c:choose>
+                </th>
             </tr>
             </c:forEach>
             </tbody>

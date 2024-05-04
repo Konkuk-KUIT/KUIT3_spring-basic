@@ -19,6 +19,9 @@ public class MemoryUserRepository {
         insert(new User("admin","admin","어드민","admin@kuit.com"));
     }
 
+    public void addUser(User user) {
+        users.put(user.getUserId(), user);
+    }
 
     public void insert(User user) {
         users.put(user.getUserId(), user);
