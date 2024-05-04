@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+@Repository
 public class MemoryAnswerRepository {
 
     private Map<String, Answer> answers= new HashMap<>();
@@ -40,7 +41,6 @@ public class MemoryAnswerRepository {
 
         return result;
     }
-
 
     public Answer insert(Answer answer) {
         answer.setAnswerId(getPK());
