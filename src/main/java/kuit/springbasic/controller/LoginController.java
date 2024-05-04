@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Slf4j
@@ -15,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequiredArgsConstructor
 @RequestMapping("/user")
 public class LoginController {
-    
+
     private final MemoryUserRepository memoryUserRepository;
 
 
@@ -42,18 +43,30 @@ public class LoginController {
      * loginV3 : @RequestParam 생략(비추천)
      * loginV4 : @ModelAttribute
      */
+    //loginV1
     @RequestMapping("/login")
-    public ModelAndView Login(@ModelAttribute User user, HttpSession session) {
-        String userId = user.getUserId();
-        String password = user.getPassword();
-        User user_ = memoryUserRepository.findByUserId(userId);
+    public ModelAndView Login(@RequestParam("userId") String Id, @RequestParam("password") String pw,  HttpSession session) {
+        User user_ = memoryUserRepository.findByUserId(Id);
 
-        if (user_ != null && user_.isSameUser(userId, password)) {
+        if (user_ != null && user_.isSameUser(Id, pw)) {
             session.setAttribute("user", user_);
             return new ModelAndView("redirect:/");
         }
         return new ModelAndView("redirect:/user/loginFailed");
     }
+    // loginV4
+//    @RequestMapping("/login")
+//    public ModelAndView Login(@ModelAttribute User user, HttpSession session) {
+//        String userId = user.getUserId();
+//        String password = user.getPassword();
+//        User user_ = memoryUserRepository.findByUserId(userId);
+//
+//        if (user_ != null && user_.isSameUser(userId, password)) {
+//            session.setAttribute("user", user_);
+//            return new ModelAndView("redirect:/");
+//        }
+//        return new ModelAndView("redirect:/user/loginFailed");
+//    }
     @RequestMapping("/logout")
     public ModelAndView Logout(@ModelAttribute User user, HttpSession session) {
         session.removeAttribute("user");

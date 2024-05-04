@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Slf4j
@@ -32,13 +33,21 @@ public class UserController {
      * createUserV1 : @RequestParam
      * createUserV2 : @ModelAttribute
      */
+    // createUserV1
     @RequestMapping("/signup")
-    public ModelAndView createUser(@ModelAttribute User user) {
-
+    public ModelAndView createUser(@RequestParam("userId") String userId, @RequestParam("password") String userPW, @RequestParam("name") String name, @RequestParam("email") String email) {
+        User user = new User(userId, userPW, name, email);
         memoryUserRepository.insert(user);
-
         return new ModelAndView("redirect:/user/loginForm");
     }
+    // createUserV2
+//    @RequestMapping("/signup")
+//    public ModelAndView createUser(@ModelAttribute User user) {
+//
+//        memoryUserRepository.insert(user);
+//
+//        return new ModelAndView("redirect:/user/loginForm");
+//    }
 
     /**
      * TODO: showUserList
