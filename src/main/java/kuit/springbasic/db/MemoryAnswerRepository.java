@@ -2,6 +2,9 @@ package kuit.springbasic.db;
 
 
 import kuit.springbasic.domain.Answer;
+import lombok.Getter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Date;
@@ -12,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+@Repository
 public class MemoryAnswerRepository {
 
     private Map<String, Answer> answers= new HashMap<>();
@@ -48,4 +52,9 @@ public class MemoryAnswerRepository {
         answers.put(Integer.toString(answer.getAnswerId()),answer);
         return answer;
     }
+
+    @Getter
+    @Autowired
+    private ApplicationContext applicationContext;
+
 }
